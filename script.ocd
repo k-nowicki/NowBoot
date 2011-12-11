@@ -1,0 +1,20 @@
+#	OpenOCD Target Script for Atmel AT91SAM7S256
+
+
+
+halt
+reset halt
+sleep 100
+#This next line should only be run when it is necessary to clear the lock bits
+#flash protect 0 0 2 off
+#flash erase_sector 0 0 4
+flash write_bank 0 Bootloader.bin 0x00000000 
+#flash write_bank 0 firmware.bin  0x00008000
+sleep 100
+mww 0xfffffd08 0xa5000401
+sleep 100
+resume
+reset run
+sleep 100
+shutdown
+
