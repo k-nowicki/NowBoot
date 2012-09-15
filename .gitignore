@@ -1,0 +1,8 @@
+*.elf
+*.bin
+*.hex
+*.lst
+*.o
+.metadata/
+.project
+*
