@@ -44,21 +44,20 @@ HDIR=	  INC/ \
 		  INC/APP/SrcAtmel/
 
 
-#Use this for CodeSoursery
+#confuguration fo Sourcery g++
 CC=arm-none-eabi-gcc
 CP=arm-none-eabi-gcc
 OBJCOPY=arm-none-eabi-objcopy
-SIZE= arm-none-eabi-size
+SIZE=arm-none-eabi-size
 
-#Or this for gnu-gcc
+#Configuration for Yagarto
 #CC=arm-elf-gcc
 #CP=arm-elf-gcc
 #OBJCOPY=arm-elf-objcopy
 #SIZE=arm-elf-size
 
-
+#Uni configuration
 LDSCRIPT= LNK/atmel-rom.ld
-
 LINKER_FLAGS=-mthumb -nostartfiles -Xlinker -o$(TARGET_NAME).elf -Xlinker -M -Xlinker -Map=$(TARGET_NAME).map
 
 DEBUG=-g
@@ -174,8 +173,6 @@ clean :
 #-----------------------------------------------------------------------------#
 print_size :
 	arm-none-eabi-size -B -t --common $(THUMB_OBJS) $(ARM_OBJS)
-	#arm-elf-size -B -t --common $(THUMB_OBJS) $(ARM_OBJS)
-	
 	$(SIZE) -B -t -d $(TARGET_NAME).elf
 #	$(SIZE) -A $(TARGET_NAME).o
 
@@ -200,14 +197,16 @@ print_size :
 TARGET = $(TARGET_NAME).bin
 
 # specify the directory where openocd executable and configuration files reside
-#OPENOCD_DIR =
+#OPENOCD_DIR = 'D:/Program Files/openocd-r717/bin/'
+#'c:/Program Files/openocd-2007re141/bin/'
 
 # specify OpenOCD executable (pp is for the wiggler, ftd2xx is for the USB debuggers)
 OPENOCD = openocd
 #OPENOCD = $(OPENOCD_DIR)openocd-ftd2xx.exe
 
 # specify OpenOCD configuration file (pick the one for your device)
-OPENOCD_CFG =  -f interface/parport.cfg -f target/sam7x256.cfg -c init -f script.ocd
+OPENOCD_CFG =   -f interface/jtagkey.cfg -f target/at91sam7x256.cfg -c init -c "reset_config srst_pulls_trst" -f script.ocd
+#OPENOCD_CFG =  -f interface/parport.cfg -f target/sam7x256.cfg -c init -f script.ocd
 #OPENOCD_CFG = $(OPENOCD_DIR)at91sam7s256-jtagkey-flash-program.cfg
 #OPENOCD_CFG = $(OPENOCD_DIR)at91sam7s256-armusbocd-flash-program.cfg
 
@@ -216,8 +215,3 @@ program: $(TARGET)
 	@echo "Flash Programming with OpenOCD..."			# display a message on the console
 	$(OPENOCD) $(OPENOCD_CFG)						# program the onchip FLASH here
 	@echo "Flash Programming Finished."					# display a message on the console
-
-
-
-
-
