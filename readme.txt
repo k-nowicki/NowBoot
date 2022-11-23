@@ -1,15 +1,15 @@
 /-----------------------------------------------------------------------------/
-/ NowBoot is a Bootloader module for small embedded systems which
-/ working with FreeRTOS.
-/ With few changes in boot.s containing exception vectors
-/ it can be use with any other firmware.
+/ NowBoot is a Bootloader module for small embedded systems based on FreeRTOS.
+/ With few changes in boot.s containing exception vectors it can be used with
+/ any other bare-metal firmware.
+/
 / C 2010 -2011, Karol Nowicki
 /
-/ NowBoot contain some code which is provided by third-parties like:
+/ NowBoot contains code provided by third-parties like:
 / 	-FatFs
 /	-Atmel peripherial drivers
 /	-FreeRTOS (sample boot.s startup file)
-/ AND IS LICENSED SEPARATELY FROM NowBoot.
+/ THOSE LIBRARIES ARE LICENSED SEPARATELY FROM NowBoot!
 /
 /
 /
@@ -25,7 +25,7 @@
 /-----------------------------------------------------------------------------/
 [PL]
 NowBoot jest otwartym, kompletnym bootloaderem dla mikrokontrolerów SAM7 firmy Atmel, 
-ładującym program z pliku umieszczonego na karcie SD (ale nie tylko na karcie).
+ładującym program z pliku (np umieszczonego na karcie SD).
 
 NowBoot jest umieszczany na samym początku pamięci programu (od adresu 0x00) i od niego 
 zaczyna się wykonywanie programu. Sprawdza, czy na lokalnym dysku jest plik z 
